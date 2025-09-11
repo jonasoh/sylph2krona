@@ -3,7 +3,7 @@
 # @version    0.1.0
 # @license    MIT
 # @author     Jonas Ohlsson <jonas.ohlsson at slu.se>
-# @depends    pandas>=0.25.0
+# @depends    pandas>=2.3,<3
 """
 Convert Sylph profiles to Krona-compatible format using GTDB taxonomy.
 """
@@ -13,8 +13,8 @@ import sys
 import os
 import hashlib
 import argparse
-import urllib.request
 import pandas as pd
+import urllib.request
 from pathlib import Path
 
 
@@ -216,7 +216,7 @@ def main():
     )
     ap.add_argument(
         "--abundance",
-        choices=["tax", "seq", "Taxonomic_abundance", "Sequence_abundance"],
+        choices=["tax", "seq"],
         default="tax",
         help="which abundance column to use: tax (Taxonomic) or seq (Sequence) abundance",
     )

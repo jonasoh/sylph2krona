@@ -4,7 +4,7 @@ Convert [sylph](https://github.com/bluenote-1577/sylph) profiles to [Krona](http
 
 ## Requirements
 
-- Python 3.6+
+- Python 3.9+
 - pandas
 - [GTDB taxonomy files](https://data.gtdb.ecogenomic.org/releases/latest/) (the latest are downloaded automatically if not present)
 - [KronaTools](https://github.com/marbl/Krona/wiki/KronaTools) for visualization
