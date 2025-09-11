@@ -32,3 +32,5 @@ sylph2krona --input profile.tsv --outdir my_results
 sylph2krona generates individual Krona-compatible text files for each sample in the input profile,
 and prints a suggested `ktImportText` command to generate a combined Krona HTML visualization.
 After running the tool, use the suggested KronaTools command to generate the interactive HTML visualization.
+
+<img width="1546" height="1442" alt="image" src="https://github.com/user-attachments/assets/8d0c5adc-cce5-47ca-833b-354d0b14b0f9" />
