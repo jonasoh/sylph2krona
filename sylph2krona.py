@@ -232,8 +232,10 @@ def main():
     bac_file = download_taxonomy_file(args.bac)
     ar_file = download_taxonomy_file(args.ar)
 
-    # Display version warning if files were downloaded
-    if not (os.path.exists(args.bac) and os.path.exists(args.ar)):
+    def check_file_exists(file_path):
+        return os.path.exists(file_path) or os.path.exists(f"{file_path}.gz")
+
+    if not (check_file_exists(args.bac) and check_file_exists(args.ar)):
         print(
             f"\nWARNING: GTDB taxonomy files are downloaded for version {gtdb_version}. "
             f"Make sure that this version matches your sylph database!\n"
@@ -292,13 +294,9 @@ def main():
     written = []
     for sample, g in grouped.groupby("Sample_file"):
         out_path = outdir / f"{safe_fname(sample)}_krona.txt"
+        # krona accepts 'number \t semicolon path' format directly
         g_out = g[["abundance", "krona_path"]].copy()
-        # krona expects: number \t level1 \t level2 ... but also accepts 'number \t semicolon path'
-        # we will split the semicolon path into columns to be maximally compliant
-        # path like 'root;a;b;c' -> columns: number, root, a, b, c
-        split_cols = g_out["krona_path"].str.split(";", expand=True)
-        to_write = pd.concat([g_out[["abundance"]], split_cols], axis=1)
-        to_write.to_csv(out_path, sep="\t", header=False, index=False)
+        g_out.to_csv(out_path, sep="\t", header=False, index=False)
         written.append((out_path, sample))
 
     # print a handy ktImportText command suggestion to stdout
