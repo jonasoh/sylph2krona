@@ -16,6 +16,7 @@ import argparse
 import pandas as pd
 import urllib.request
 from pathlib import Path
+from . import __version__
 
 
 def read_gtdb_tax(paths):
@@ -199,7 +200,13 @@ def get_md5_checksums():
 
 def main():
     ap = argparse.ArgumentParser(
-        description="join sylph profile to gtdb taxonomy and emit krona-ready text files per sample"
+        description=f"sylph2krona v{__version__}: join sylph profile to GTDB taxonomy and emit krona-ready text files",
+    )
+    ap.add_argument(
+        "--version",
+        "-v",
+        action="store_true",
+        help="show version information and exit",
     )
     ap.add_argument(
         "--input", "-i", required=True, help="sylph profile tsv (use '-' for stdin)"
@@ -224,6 +231,11 @@ def main():
         "--outdir", "-o", default="krona_out", help="output directory for *_krona.txt"
     )
     args = ap.parse_args()
+
+    # Handle version display
+    if args.version:
+        print(f"sylph2krona v{__version__}")
+        sys.exit(0)
 
     # Get GTDB version before downloading files
     gtdb_version = get_gtdb_version()
