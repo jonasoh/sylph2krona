@@ -14,7 +14,7 @@ Convert [sylph](https://github.com/bluenote-1577/sylph) profiles to [Krona](http
 
 The easiest way to use sylph2krona is via [uv](https://docs.astral.sh/uv/), e.g. for quick one-offs:
 ```bash
-alias sylph2krona='uvx git+https://github.com/jonasoh/sylph2krona -h'
+alias sylph2krona='uvx git+https://github.com/jonasoh/sylph2krona'
 sylph2krona -h
 ```
 
