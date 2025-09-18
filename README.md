@@ -14,8 +14,24 @@ Convert [sylph](https://github.com/bluenote-1577/sylph) profiles to [Krona](http
 
 The easiest way to use sylph2krona is via [uv](https://docs.astral.sh/uv/), e.g. for quick one-offs:
 ```bash
-alias sylph2krona='uvx git+https://github.com/jonasoh/sylph2krona'
-sylph2krona -h
+$ alias sylph2krona='uvx git+https://github.com/jonasoh/sylph2krona'
+$ sylph2krona -h
+<…>
+usage: sylph2krona [-h] [--version] --input INPUT [--bac BAC] [--ar AR] [--abundance {tax,seq}] [--outdir OUTDIR]
+
+sylph2krona v0.1.0: join sylph profile to GTDB taxonomy and emit krona-ready text files
+
+options:
+  -h, --help            show this help message and exit
+  --version, -v         show version information and exit
+  --input INPUT, -i INPUT
+                        sylph profile tsv (use '-' for stdin)
+  --bac BAC             GTDB bac taxonomy tsv file (can be gzipped)
+  --ar AR               GTDB ar taxonomy tsv file (can be gzipped)
+  --abundance {tax,seq}
+                        which abundance column to use: tax (Taxonomic) or seq (Sequence) abundance
+  --outdir OUTDIR, -o OUTDIR
+                        output directory for *_krona.txt
 ```
 
 Or to install it permanently in your Python environment:
@@ -32,6 +48,9 @@ After running the tool, use the suggested KronaTools command to generate the int
 # Basic usage
 sylph2krona --input profile.tsv
 
+# Custom output directory
+sylph2krona --input profile.tsv --outdir my_results
+
 # Using stdin to clean sample names
 sed 's/.fastq.gz//g' profile.tsv | sylph2krona --input -
 
@@ -40,9 +59,6 @@ sylph2krona --input profile.tsv --bac path/to/bac120_taxonomy.tsv.gz --ar path/t
 
 # Using sequence abundance instead of taxonomic abundance
 sylph2krona --input profile.tsv --abundance seq
-
-# Custom output directory
-sylph2krona --input profile.tsv --outdir my_results
 ```
 
 <img width="1546" height="1442" alt="image" src="https://github.com/user-attachments/assets/8d0c5adc-cce5-47ca-833b-354d0b14b0f9" />
